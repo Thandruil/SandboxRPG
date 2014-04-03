@@ -1,0 +1,14 @@
+# JetBrains IDEs
+.idea/
+*.ipr
+*.iws
+*.iml
+
+# Maven
+/log
+/target
+
+# Java
+*.class
+
+lib/

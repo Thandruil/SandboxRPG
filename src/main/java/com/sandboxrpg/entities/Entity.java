@@ -1,23 +1,16 @@
 package com.sandboxrpg.entities;
 
+import org.lwjgl.util.vector.Vector3f;
+
 import java.util.UUID;
 
 public abstract class Entity {
 
-    private static int nextEntityID;
-    private int entityID;
-    private UUID entityUniqueID;
-
-    public float x;
-    public float y;
-    // public float z;
-
-    public float dx;
-    public float dy;
-    // public float dz;
+    public Vector3f position;
+    public Vector3f rotation;
 
     public Entity() {
-        this.entityID = nextEntityID++;
-        this.entityUniqueID = UUID.randomUUID();
+        this.position = new Vector3f(0,0,0);
+        this.rotation = new Vector3f(0,0,0);
     }
 }

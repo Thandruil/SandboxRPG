@@ -1,6 +1,8 @@
 package com.sandboxrpg.client;
 
 import com.sandboxrpg.world.World;
+import com.sun.deploy.util.BufferUtil;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -18,7 +20,7 @@ import static org.lwjgl.util.glu.GLU.gluPerspective;
 
 public class Game {
 
-    private static final Logger logger = Logger.getLogger("");
+    public static final Logger logger = Logger.getLogger("");
     private static Game theGame;
 
     boolean running = true;
@@ -27,6 +29,8 @@ public class Game {
     int displayHeight;
     float aspectRatio;
     boolean fullscreen;
+
+    float speed = 0.2f;
 
     Vector3f camerapos = new Vector3f(0,0,0);
     Vector3f camerarot = new Vector3f(0,0,0);
@@ -39,7 +43,7 @@ public class Game {
         this.fullscreen = fullscreen;
     }
 
-    private void initGame() throws LWJGLException {
+    void initGame() throws LWJGLException {
         Display.setDisplayMode(new DisplayMode(this.displayWidth, this.displayHeight));
 
         Display.setResizable(false);
@@ -52,7 +56,7 @@ public class Game {
         gluPerspective(90f, 1280f/720f, 0.1f, 500f);
 
         glMatrixMode(GL_MODELVIEW);
-        glClearColor(0f, 0f, 0f, 0.5f);
+        glClearColor(0, 0.75f, 1, 1);
         glClearDepth(1.0f);
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LEQUAL);
@@ -103,23 +107,28 @@ public class Game {
             }
 
             if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
-                camerapos.x -= 0.1*Math.sin(Math.toRadians(-camerarot.y));
-                camerapos.z -= 0.1*Math.cos(Math.toRadians(-camerarot.y));
+                camerapos.x -= speed*Math.sin(Math.toRadians(-camerarot.y));
+                camerapos.z -= speed*Math.cos(Math.toRadians(-camerarot.y));
             }
             if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
-                camerapos.x += 0.1*Math.sin(Math.toRadians(-camerarot.y));
-                camerapos.z += 0.1*Math.cos(Math.toRadians(-camerarot.y));
+                camerapos.x += speed*Math.sin(Math.toRadians(-camerarot.y));
+                camerapos.z += speed*Math.cos(Math.toRadians(-camerarot.y));
             }
             if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
-                camerapos.x += 0.1*Math.sin(Math.toRadians(-camerarot.y - 90));
-                camerapos.z += 0.1*Math.cos(Math.toRadians(-camerarot.y - 90));
+                camerapos.x += speed*Math.sin(Math.toRadians(-camerarot.y - 90));
+                camerapos.z += speed*Math.cos(Math.toRadians(-camerarot.y - 90));
             }
             if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
-                camerapos.x += 0.1*Math.sin(Math.toRadians(-camerarot.y + 90));
-                camerapos.z += 0.1*Math.cos(Math.toRadians(-camerarot.y + 90));
+                camerapos.x += speed*Math.sin(Math.toRadians(-camerarot.y + 90));
+                camerapos.z += speed*Math.cos(Math.toRadians(-camerarot.y + 90));
             }
 
             camerapos.y = world.getHeight(camerapos.x, camerapos.z) + 1.6f;
+
+            if (camerapos.x >= world.getSize()-1) {camerapos.x = world.getSize()-1;}
+            if (camerapos.z >= world.getSize()-1) {camerapos.z = world.getSize()-1;}
+            if (camerapos.x < 1) {camerapos.x = 1;}
+            if (camerapos.z < 1) {camerapos.z = 1;}
 
             Display.update();
             Display.sync(60);

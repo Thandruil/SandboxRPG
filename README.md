@@ -8,11 +8,11 @@ Maven is used to handle the dependencies.
 
 * Install [Maven 3](http://maven.apache.org/download.html)
 * Clone this repository and: `maven clean install`
+* Run as a jar using the `-Djava.library.path=lib/natives` parameter.
 
 ## Team
 
 * Thandruil - Programming
-* anonymous - Art
 
 You can contact us by opening a ticket here, or shoot me an [e-mail](mailto:erik@erikgaal.nl).
 

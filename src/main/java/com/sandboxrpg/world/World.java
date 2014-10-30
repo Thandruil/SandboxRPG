@@ -4,6 +4,7 @@ public class World {
 
     private Heightmap heightmap;
     private Tilemap tilemap;
+    private int scale = 2;
 
     public World() {
         heightmap = new Heightmap("resources/heightmap256.bmp");
@@ -16,5 +17,9 @@ public class World {
 
     public Tilemap getTilemap() {
         return tilemap;
+    }
+
+    public int getScale() {
+        return scale;
     }
 }

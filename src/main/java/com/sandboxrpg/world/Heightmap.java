@@ -27,8 +27,12 @@ public class Heightmap {
         }
     }
 
-    public int getSize() {
+    public int getLength() {
         return height.length;
+    }
+
+    public int getWidth(int x) {
+        return height[x].length;
     }
 
     public float getHeight(int x, int z) {

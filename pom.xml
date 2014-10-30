@@ -16,6 +16,14 @@
         <release.natives>lib/natives/</release.natives>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>slick</id>
+            <name>slick</name>
+            <url>http://slick.cokeandcode.com/mavenrepo</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.lwjgl.lwjgl</groupId>

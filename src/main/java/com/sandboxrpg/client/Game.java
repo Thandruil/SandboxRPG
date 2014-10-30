@@ -113,24 +113,6 @@ public class Game {
     }
 
     private void logic() {
-        camera.lookThrough(player.getEntity());
-
-        for (Entity entity : currentWorld.getEntities()) {
-            Vector3f current = entity.getPosition();
-            float vertical = entity.getVertical() - .5f * 9.81f;
-            entity.setVertical(vertical);
-
-            float ground = currentWorld.getHeight(current.getX(), current.getZ()) + 2f;
-            float gravity = current.getY() + vertical * delta;
-
-            current.setY(Math.max(gravity, ground));
-
-            if (gravity <= ground) {
-                entity.setVertical(0f);
-            }
-
-            entity.setPosition(current);
-        }
     }
 
     private void render() {

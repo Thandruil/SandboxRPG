@@ -15,10 +15,6 @@ public class Player {
         this.entity = new EntityPlayer(world);
     }
 
-    public Entity getEntity() {
-        return entity;
-    }
-
     public void input(float delta) {
         float x = entity.getPosition().getX();
         float z = entity.getPosition().getZ();
@@ -65,11 +61,6 @@ public class Player {
         if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
             x += speed * delta * Math.sin(Math.toRadians(-roty + 90));
             z += speed * delta * Math.cos(Math.toRadians(-roty + 90));
-        }
-        if (Keyboard.isKeyDown(Keyboard.KEY_3)) {
-            float entityx = entity.getPosition().getX();
-            float entityz = entity.getPosition().getZ();
-            entity.getWorld().dig(entityx, entityz);
         }
 
         entity.setPosition(x, entity.getPosition().getY(), z);
